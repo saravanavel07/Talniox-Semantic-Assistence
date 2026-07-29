@@ -1,0 +1,220 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-gunmetal: #0A0A0B;
+    --panel-steel-1: #16171A;
+    --panel-steel-2: #1D1E22;
+    --accent-red: #8C1F1F;
+    --accent-red-bright: #B33232;
+    --accent-steel: #7A7D85;
+    --accent-live: #C4432E;
+    --text-steel: #E4E4E6;
+    --text-muted: #8B8D93;
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Scrollbar styling for field instrument console */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0B;
+}
+::-webkit-scrollbar-thumb {
+  background: #1D1E22;
+  border: 1px solid #7A7D85;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B33232;
+}
+
+/* Avionics Field Grid Backgrounds */
+.bg-tactical-grid {
+  background-image: 
+    linear-gradient(to right, rgba(122, 125, 133, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(122, 125, 133, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-dot-matrix {
+  background-image: radial-gradient(rgba(122, 125, 133, 0.15) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Eagle Assembly & Snap Lock-on Keyframes */
+@keyframes lockOnPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(179, 50, 50, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 40px 10px rgba(179, 50, 50, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(179, 50, 50, 0);
+  }
+}
+
+@keyframes lineSnap {
+  0% {
+    stroke-dashoffset: 800;
+    opacity: 0.1;
+  }
+  60% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+/* Wing Breathing Idle Motion (2-4% scale/skew, 4+ sec cycle - alive, not GIF) */
+@keyframes wingBreathingSubtle {
+  0%, 100% {
+    transform: scale(1) skew(0deg, 0deg) translateY(0px);
+    filter: drop-shadow(0 0 8px rgba(140, 31, 31, 0.3));
+  }
+  50% {
+    transform: scale(1.03) skew(0.5deg, -0.5deg) translateY(-2px);
+    filter: drop-shadow(0 0 18px rgba(179, 50, 50, 0.5));
+  }
+}
+
+/* Thin Scanning Arc Sweep in Steel Gray */
+@keyframes radarSweepGray {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-radar-gray {
+  animation: radarSweepGray 12s linear infinite;
+  transform-origin: center;
+}
+
+.animate-eagle-assembly {
+  stroke-dasharray: 800;
+  animation: lineSnap 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-eagle-wing-idle {
+  animation: wingBreathingSubtle 5.2s ease-in-out infinite 2.4s;
+  transform-origin: center;
+}
+
+/* Muted Red-Orange Pulse for Live Data Ticker */
+@keyframes livePulseState {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.2);
+  }
+}
+
+.animate-live-pulse {
+  animation: livePulseState 2s ease-in-out infinite;
+}
+
+/* Continuous HUD Rings & Eagle Rotation Animations */
+@keyframes rotateClockwise {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes rotateCounterClockwise {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+@keyframes hudGimbal3D {
+  0% { transform: perspective(1000px) rotateX(10deg) rotateY(0deg); }
+  50% { transform: perspective(1000px) rotateX(10deg) rotateY(180deg); }
+  100% { transform: perspective(1000px) rotateX(10deg) rotateY(360deg); }
+}
+
+@keyframes scanlineLaser {
+  0% { top: 0%; opacity: 0; }
+  15% { opacity: 0.8; }
+  85% { opacity: 0.8; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes particleFloat {
+  0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
+  50% { transform: translateY(-12px) translateX(6px); opacity: 0.8; }
+}
+
+.animate-rotate-cw {
+  animation: rotateClockwise 20s linear infinite;
+  transform-origin: center;
+}
+
+.animate-rotate-cw-fast {
+  animation: rotateClockwise 8s linear infinite;
+  transform-origin: center;
+}
+
+.animate-rotate-ccw {
+  animation: rotateCounterClockwise 28s linear infinite;
+  transform-origin: center;
+}
+
+.animate-gimbal-3d {
+  animation: hudGimbal3D 24s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.animate-scanline {
+  animation: scanlineLaser 4s ease-in-out infinite;
+}
+
+.animate-particle-float {
+  animation: particleFloat 4s ease-in-out infinite;
+}
+
+/* Data Particle Flow Along Architecture Connector Lines */
+@keyframes dotTravel {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-radar-gray,
+  .animate-eagle-wing-idle,
+  .animate-live-pulse,
+  .animate-eagle-assembly {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+    transform: none !important;
+  }
+}

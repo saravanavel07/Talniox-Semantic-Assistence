@@ -1,0 +1,6 @@
+{
+  "name": "Talonix - Aegis Semantic Kernel Research Assistant",
+  "description": "Talonix is an advanced AI Research Assistant interface powered by Microsoft Semantic Kernel architecture.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
