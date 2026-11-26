@@ -1,89 +1,131 @@
 <div align="center">
 
 # ✦ TALONIX ✦
-### Aegis Semantic Kernel · AI Research Assistant
+
+### Aegis Semantic Kernel AI Research Assistant
 
 **Ask boldly. Explore deeply. Verify every insight.**
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-94.2%25-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Powered by Gemini](https://img.shields.io/badge/AI-Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)](https://ai.google.dev/)
+[![Gemini](https://img.shields.io/badge/Powered%20by-Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)](https://ai.google.dev/)
 [![Semantic Kernel](https://img.shields.io/badge/Orchestration-Semantic%20Kernel-5C2D91?style=for-the-badge)](https://learn.microsoft.com/semantic-kernel/)
 
-### A research cockpit built to turn complex questions into grounded answers.
+```text
+┌────────────────────────────────────────────────────────┐
+│  ◉  TALONIX // AEGIS KERNEL                            │
+│  ────────────────────────────────────────────────────  │
+│  [ QUERY ] ──▶ [ PLAN ] ──▶ [ SEARCH ] ──▶ [ VERIFY ]  │
+│                                                        │
+│  ▰▰▰▰▰▰▰░░░  RESEARCH PIPELINE ACTIVE                  │
+│                                                        │
+│  ◆ Memory  ◆ Documents  ◆ Web  ◆ Citations             │
+└────────────────────────────────────────────────────────┘
+```
 
 </div>
 
 ---
 
-## ✨ The experience
+## ✨ The Experience
 
-Talonix is an AI research assistant designed to break a question into manageable steps, gather relevant context, check claims, and synthesize a cited response. Its telemetry-inspired interface makes the research flow visible while you work.
+Talonix is an AI research assistant built around a modern multi-stage pipeline:
 
-> **From question → plan → sources → verification → synthesis.**
+> **Question → Plan → Retrieve → Verify → Synthesize**
 
-## 🦅 Live telemetry, in motion
+It combines planning, parallel plugin retrieval, vector memory, fact checking, and cited synthesis into one focused research experience.
 
-The **Eagle Telemetry HUD Mark** (`src/components/EagleMark.tsx`) is the visual centerpiece: an SVG eagle silhouette framed by avionics-inspired rings, reticles, and status indicators. Its motion and color cues are designed to make system activity easy to scan—not just decorative.
+## 🦅 Eagle Telemetry HUD
 
-| HUD element | Visual effect | What it communicates |
-| --- | --- | --- |
-| Compass ring | Slow counter-clockwise rotation | Orientation and ambient telemetry |
-| Inner reticle | Faster clockwise dashed rotation | Active tracking |
-| Radar sweep | Rotating sweep arc | Ongoing scan activity |
-| Vector nodes | State-driven pulses and glow | Pipeline activity and connections |
-| Eagle touch zones | Highlight on hover or selection | Selectable research stages |
+The signature **Eagle Telemetry HUD Mark** is located in `src/components/EagleMark.tsx`. It is an SVG-based telemetry interface designed to make pipeline activity visible while keeping the eagle silhouette as a stable visual anchor.
 
-### Follow the signal
+| Eagle zone | Research stage | HUD effect |
+|:--|:--|:--|
+| **Head & beak** | Synthesis & answer generation | Bright eye node and red focus highlight |
+| **Central body** | Stepwise planning | Facets pulse as the execution plan takes shape |
+| **Wings** | Web and document search | Vector wireframes pulse during retrieval |
+| **Tail & anchors** | Memory recall | Tail facets illuminate during vector matching |
 
-| Eagle zone | Research stage | HUD response |
-| --- | --- | --- |
-| **Head & beak** | Answering · synthesis | Bright eye node and focused red highlight |
-| **Central body & spine** | Planning | Facet pulses as the plan takes shape |
-| **Wings** | Web and document search | Wireframe vectors pulse during parallel retrieval |
-| **Tail & base anchors** | Memory recall | Tail facets glow as relevant context is retrieved |
+### Interface effects
 
-The eagle remains centered as a stable visual anchor. Motion is reserved for rings, sweep lines, and stateful telemetry, helping active signals stand out from the background.
-
-## 🧠 How a research request flows
+- Counter-clockwise compass rotation
+- Clockwise inner tracking ring
+- Rotating radar sweep
+- Pulsing SVG telemetry nodes
+- Interactive eagle anatomy zones
+- State-driven red, amber, and signal-white highlights
 
 ```text
-┌─────────────────┐    ┌─────────────────┐    ┌──────────────────────┐
-│  Your question  │───▶│  Stepwise plan  │───▶│  Parallel retrieval  │
-└─────────────────┘    └─────────────────┘    │  Web · Memory · Docs │
-                                               └──────────┬───────────┘
-                                                          ▼
-┌─────────────────┐    ┌─────────────────┐    ┌──────────────────────┐
-│ Cited synthesis │◀───│ Claim checking  │◀───│ Relevant context     │
-└─────────────────┘    └─────────────────┘    └──────────────────────┘
+              N 000°
+                 ↑
+        ╭─── ◉ ───╮
+ W 270° ←   ╱╲   Eagle   → E 090°
+           ╱◉ ◉╲  Telemetry
+        ╰─── ╱╲ ───╯
+              ↓
+             S 180°
 ```
 
-1. **Capture** the prompt, selected modes, and session context.
-2. **Plan** a sequence of focused research steps.
-3. **Retrieve** from web search, memory, and documents in parallel.
-4. **Check** claims against available grounding and flag uncertainty.
-5. **Synthesize** a structured response with citations and execution details.
-
-## 🏛 Architecture
+## 🧠 Research Pipeline
 
 ```text
-Query Envelope → Stepwise Planner → Parallel Plugins
-                                      ├─ WebSearchPlugin
-                                      ├─ MemoryPlugin
-                                      └─ DocumentPlugin
-             Research Synthesis ← Fact-Check Agent ← Vector Memory
+┌──────────────┐
+│ Query Envelope│
+└──────┬───────┘
+       │
+       ▼
+┌──────────────┐     ┌───────────────────────┐
+│ Stepwise Plan│────▶│ Parallel Plugins      │
+└──────────────┘     │ • Web search          │
+                     │ • Memory retrieval    │
+                     │ • Document context    │
+                     └───────────┬───────────┘
+                                 │
+                                 ▼
+                     ┌───────────────────────┐
+                     │ Vector Memory Store   │
+                     └───────────┬───────────┘
+                                 │
+                                 ▼
+                     ┌───────────────────────┐
+                     │ Fact Check & Validate │
+                     └───────────┬───────────┘
+                                 │
+                                 ▼
+                     ┌───────────────────────┐
+                     │ Cited Research Result │
+                     └───────────────────────┘
 ```
 
-The README describes a Semantic Kernel-inspired, multi-stage orchestration flow powered by Gemini models. See the implementation for the current runtime behavior and supported capabilities.
+1. **Query envelope** captures the prompt, mode, and session context.
+2. **Stepwise planner** decomposes the request into focused execution steps.
+3. **Parallel plugins** collect web, memory, and document context.
+4. **Vector memory** performs relevant context retrieval.
+5. **Fact checking** validates claims and reports confidence.
+6. **Synthesis** produces a structured answer with citations and plan metadata.
 
-## 🚀 Get started
+## 🏗️ Architecture
+
+Talonix uses Semantic Kernel-inspired orchestration concepts with Gemini-powered model capabilities.
+
+| Component | Responsibility |
+|:--|:--|
+| `QueryEnvelope` | Ingest prompts and research mode |
+| `StepwisePlanner` | Create and coordinate execution steps |
+| `WebSearchPlugin` | Find real-time web context |
+| `MemoryPlugin` | Retrieve relevant stored knowledge |
+| `DocumentPlugin` | Parse PDFs and text documents |
+| `FactCheckAgent` | Cross-check claims against grounding |
+| `ResearchSynthesis` | Format the final cited response |
+
+## 🚀 Installation
 
 ### Requirements
 
 - Node.js 18 or later
 - npm 9 or later
-- A Gemini API key for model-backed features
+- A Gemini API key
 
-### Run locally
+### Setup
 
 ```bash
 git clone https://github.com/saravanavel07/Talniox-Semantic-Assistence.git
@@ -91,31 +133,33 @@ cd Talniox-Semantic-Assistence
 npm install
 ```
 
-Create a `.env` file in the project root and add your key:
+Create a `.env` file in the project root:
 
 ```env
 GEMINI_API_KEY=your_gemini_api_key_here
 NODE_ENV=development
 ```
 
-Keep API keys private; do not commit your `.env` file.
+> Never expose API keys in browser code or commit `.env` files.
+
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-Open the local URL printed by the development server. To create and run a production build:
+Open the local URL shown in the terminal.
+
+### Production build
 
 ```bash
 npm run build
 npm run start
 ```
 
-## 📡 API overview
+## 📡 API
 
 ### `GET /api/telemetry`
-
-Returns orchestrator status and telemetry information. Example response shape:
 
 ```json
 {
@@ -132,8 +176,6 @@ Returns orchestrator status and telemetry information. Example response shape:
 
 ### `POST /api/chat`
 
-Submits a research prompt to the chat pipeline. Example request:
-
 ```json
 {
   "prompt": "Analyze quantum key distribution protocol limits",
@@ -143,19 +185,23 @@ Submits a research prompt to the chat pipeline. Example request:
 }
 ```
 
-The documented response includes generated text, a plan trace, citations, and grounding metadata. Exact request and response behavior may depend on the current implementation.
+The response can include generated text, a plan trace, citations, and grounded context metadata.
 
-## 🛠 Built with
+## 🛠 Technology
 
-- **TypeScript** for the application
-- **CSS** for the interface and visual effects
-- **Gemini** for AI model capabilities
-- **Semantic Kernel** multi-agent orchestration concepts
+- **TypeScript** — 94.2%
+- **CSS** — 4.9%
+- **HTML** — 0.9%
+- **Gemini** — AI model capability
+- **Semantic Kernel** — orchestration architecture
+- **SVG** — eagle telemetry interface
 
 ---
 
 <div align="center">
 
-**TALONIX · Illuminate the signal. Ground the answer.**
+### TALONIX // ILLUMINATE THE SIGNAL
+
+**Ground the answer. Verify the insight.**
 
 </div>
